@@ -9,7 +9,7 @@ from bs4 import *
 
 app = Flask(__name__)
 
-domain='Heroku Domain name'
+domain='dhivagar'
 TOKEN = '775020963:AAETGxRdZJZsD4YIdZkmeyIqnfcCcRvSV7A'
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 headers={"User-Agent":"Mozilla/5.0 (Linux; Android 5.1; HTC Desire 728 dual sim) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.80 Mobile Safari/537.36"}
