@@ -1,3 +1,21 @@
+from flask import Flask, request, jsonify, render_template
+import os
+import dialogflow
+import requests
+import json
+import pusher
+
+app = Flask(__name__)
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS']='v.json'
+# initialize Pusher
+pusher_client = pusher.Pusher(
+   app_id = "714271",
+key = "a214a89c7b40cf22c896",
+secret = "94e0c6705a1ffd64e2a2",
+cluster = "ap2",
+    ssl=True)
+
 import requests
 import urllib
 import os,re
@@ -7,7 +25,6 @@ from datetime import datetime,timedelta
 from time import sleep
 from bs4 import *
 
-app = Flask(__name__)
 
 domain='dhivagar'
 TOKEN = '775020963:AAETGxRdZJZsD4YIdZkmeyIqnfcCcRvSV7A'
@@ -28,9 +45,6 @@ def dipres(rn):
     return x
   except Exception as e:
     return str(e)
-@app.route('/')
-def main():
-    return f'''<html><head><title>Telegram Echobot</title></head><body>Telegram Echobot</body></html>'''
 def alink(s,k=None):
     if not k:k=s
     return '<a href="{}">{}</a>'.format(s,k)
@@ -105,7 +119,8 @@ def msg(text,fname='',chat=0):
             send_message(text,chat)
             text='/help'
         else:
-            msgf(v[1],chat,name=name);return
+            v=detect_intent_texts(project_id, "unique", v[1], 'en')
+            msgf(v,chat,name=name);return
     elif text.startswith('help'):
         h='''
 /help
@@ -144,3 +159,64 @@ if __name__ == '__main__':
     # app.run()
     z=dipres('19303689')
     print(z)
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/get_movie_detail', methods=['POST'])
+def get_movie_detail():
+    data = request.get_json(silent=True)
+    
+    try:
+        movie = data['queryResult']['parameters']['movie']
+        api_key = os.getenv('OMDB_API_KEY')
+        
+        movie_detail = requests.get('http://www.omdbapi.com/?t={0}&apikey={1}'.format(movie, api_key)).content
+        movie_detail = json.loads(movie_detail)
+
+        response =  """
+            Title : {0}
+            Released: {1}
+            Actors: {2}
+            Plot: {3}
+        """.format(movie_detail['Title'], movie_detail['Released'], movie_detail['Actors'], movie_detail['Plot'])
+    except:
+        response = "Could not get movie detail at the moment, please try again"
+    
+    reply = {
+        "fulfillmentText": response,
+    }
+    
+    return jsonify(reply)
+
+def detect_intent_texts(project_id, session_id, text, language_code):
+    session_client = dialogflow.SessionsClient()
+    session = session_client.session_path(project_id, session_id)
+    
+    if text:
+        text_input = dialogflow.types.TextInput(
+            text=text, language_code=language_code)
+        query_input = dialogflow.types.QueryInput(text=text_input)
+        response = session_client.detect_intent(
+            session=session, query_input=query_input)
+        
+        return response.query_result.fulfillment_text
+
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    # socketId = request.form['socketId']
+    message = request.form['message']
+    project_id = 'tombot-138d8'
+    fulfillment_text = detect_intent_texts(project_id, "unique", message, 'en')
+    response_text = { "message":  fulfillment_text }
+    
+
+    pusher_client.trigger('movie_bot', 'new_message',
+                        {'human_message': message, 'bot_message': fulfillment_text})
+                        
+    return jsonify(response_text)
+
+# run Flask app
+if __name__ == "__main__":
+    app.run(debug=1)
