@@ -25,6 +25,7 @@ from datetime import datetime,timedelta
 from time import sleep
 from bs4 import *
 
+project_id = 'tombot-138d8'
 
 domain='dhivagar'
 TOKEN = '775020963:AAETGxRdZJZsD4YIdZkmeyIqnfcCcRvSV7A'
@@ -119,8 +120,8 @@ def msg(text,fname='',chat=0):
             send_message(text,chat)
             text='/help'
         else:
-            v=detect_intent_texts(project_id, "unique", v[1], 'en')
-            msgf(v,chat,name=name);return
+            
+            msgf(v[1],chat,name=name);return
     elif text.startswith('help'):
         h='''
 /help
@@ -129,6 +130,7 @@ def msg(text,fname='',chat=0):
     elif text.isdigit() and len(text)==8:text=dipres(text)
     elif text.startswith('hi'):text=f'Hi {fname}'
             #customize here
+    else:text=detect_intent_texts(project_id, "unique", text, 'en')
     if text: print(chat,text)
     send_message(text,chat)
 
@@ -207,7 +209,6 @@ def detect_intent_texts(project_id, session_id, text, language_code):
 def send_message2():
     # socketId = request.form['socketId']
     message = request.form['message']
-    project_id = 'tombot-138d8'
     fulfillment_text = detect_intent_texts(project_id, "unique", message, 'en')
     response_text = { "message":  fulfillment_text }
     
