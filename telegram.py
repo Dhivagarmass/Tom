@@ -112,7 +112,7 @@ def msg(text,fname='',chat=0):
 '''
         text=(h)
     elif text.isdigit() and len(text)==8:text=dipres(text)
-    elif text.startswith('hi'):text='Hi buddy'
+    elif text.startswith('hi'):text=f'Hi {fname}'
             #customize here
     if text: print(chat,text)
     send_message(text,chat)
