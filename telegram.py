@@ -204,7 +204,7 @@ def detect_intent_texts(project_id, session_id, text, language_code):
 
 
 @app.route('/send_message', methods=['POST'])
-def send_message():
+def send_message2():
     # socketId = request.form['socketId']
     message = request.form['message']
     project_id = 'tombot-138d8'
