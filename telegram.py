@@ -163,7 +163,7 @@ if __name__ == '__main__':
     print(z)
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return 'o'#render_template('index.html')
 
 @app.route('/get_movie_detail', methods=['POST'])
 def get_movie_detail():
