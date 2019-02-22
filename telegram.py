@@ -6,6 +6,21 @@ import json
 import pusher
 
 app = Flask(__name__)
+tru='http://tamilrockers.net'
+headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120"}
+import requests
+trc='\nhttp://tamilrockerss.ch/\nhttps://tamilrockers.unblocked.app/\n@tamilrockersnet\n@vannathirai\n@mfmixsouth\n/vpn'
+
+def tr():
+	try:
+		r=requests.get(tru,headers=headers,timeout=1)
+		s=(r.url)
+		pass
+	except Exception as e:
+		print(e)
+		s='Error'
+	return (s)+trc
+
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']='v.json'
 # initialize Pusher
@@ -122,6 +137,8 @@ def msg(text,fname='',chat=0):
         else:
             
             msgf(v[1],chat,name=name);return
+    elif 'ty' ==text2:text=tr()
+
     elif text.startswith('help'):
         h='''
 /help
