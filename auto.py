@@ -36,8 +36,7 @@ dc=defaultdict(int)
 async def handler(event):
     global lst
     try:
-        d=datetime.now().date()
-        dd=str(d)+str(event.chat_id)
+        dd=str(datetime.now().date())+str(event.chat_id)
         dc[dd]+=1
         
         if dc[dd]>10:return
