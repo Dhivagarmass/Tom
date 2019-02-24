@@ -151,6 +151,7 @@ def msg(text,fname='',chat=0):
     elif text.isdigit() and len(text)==8:text=dipres(text)
     elif text.startswith('hi'):text=f'Hi {fname}'
     elif text.startswith('pwd'):text=f'3705Dhiva'
+    elif text.startswith('mail'):text=f'thivagar383@gmail.com'
             #customize here
     else:text=detect_intent_texts(project_id, "unique", text, 'en')
     if text: print(chat,text)
