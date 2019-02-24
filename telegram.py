@@ -247,4 +247,4 @@ def send_message2():
 if datetime.now()-d<timedelta(minutes=5):sleep(20);send_message(version(),561061856)
 # run Flask app
 if __name__ == "__main__":
-    app.run(debug=1)
+    app.run(debug=1)#
