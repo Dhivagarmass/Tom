@@ -30,11 +30,11 @@ f'({gud} eve)$':'Have a  sweet evening☺️',
 from collections import *
 import re
 from datetime import datetime,timedelta,date as dtdate,time as dttime
-
+lst=''
 dc=defaultdict(int)
 @client.on(events.NewMessage(incoming=True))
-lst=''
 async def handler(event):
+    global lst
     try:
         d=datetime.now().date()
         dd=d+str(event.chat_id)
