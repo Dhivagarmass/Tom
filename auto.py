@@ -37,7 +37,7 @@ async def handler(event):
     global lst
     try:
         d=datetime.now().date()
-        dd=d+str(event.chat_id)
+        dd=str(d)+str(event.chat_id)
         dc[dd]+=1
         
         if dc[dd]>10:return
@@ -48,7 +48,7 @@ async def handler(event):
         t=re.sub('\s+',' ',t).strip()
         if t==' ':t='hi'
         for i,j in d.items():
-            if re.match(i+r'\b',t):
+            if re.match(f'\b{i}\b',t):
                 await event.respond(j)
     except Exception as e:
         print(e)
