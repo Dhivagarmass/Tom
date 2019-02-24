@@ -36,15 +36,17 @@ dc=defaultdict(int)
 async def handler(event):
     global lst
     try:
-        dd=str(datetime.now().date())+str(event.chat_id)
+        t=event.raw_text.lower()
+        dd=str(datetime.now().date())+str(event.chat_id)+t
         dc[dd]+=1
         
         if dc[dd]>10:return
-        t=event.raw_text.lower()
+        
         if lst==t:return
         lst=t
-        for i in ('manoj','da','anna','thambi'):t=t.replace(i,'')
+        for i in ('manoj','da','anna','thambi'):t=t.replace(i,' ')
         t=re.sub('\s+',' ',t).strip()
+        print(t)
         if t==' ':t='hi'
         for i,j in d.items():
             if re.match(f'\b{i}\b',t):
