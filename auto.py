@@ -29,13 +29,21 @@ f'({gud} eve)$':'Have a  sweet evening☺️',
 }
 from collections import *
 import re
+from datetime import datetime,timedelta,date as dtdate,time as dttime
+
 dc=defaultdict(int)
 @client.on(events.NewMessage(incoming=True))
+lst=''
 async def handler(event):
     try:
-        dc[event.chat_id]+=1
-        if dc[event.chat_id]>10**4:return
+        d=datetime.now().date()
+        dd=d+str(event.chat_id)
+        dc[dd]+=1
+        
+        if dc[dd]>10:return
         t=event.raw_text.lower()
+        if lst==t:return
+        lst=t
         for i in ('manoj','da','anna','thambi'):t=t.replace(i,'')
         t=re.sub('\s+',' ',t).strip()
         if t==' ':t='hi'
