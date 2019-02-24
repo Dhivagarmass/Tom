@@ -4,6 +4,10 @@ import dialogflow
 import requests
 import json
 import pusher
+from datetime import datetime,timedelta,date as dtdate,time as dttime
+t=os.getenv('HEROKU_RELEASE_CREATED_AT')
+d=datetime.fromisoformat(t[:-1])+timedelta(hours=5,minutes=30) if t else timedelta()
+version=lambda :'Cool {} | {}'.format(os.getenv('HEROKU_RELEASE_VERSION'),d)
 
 app = Flask(__name__)
 tru='http://tamilrockers.net'
@@ -174,6 +178,11 @@ snt(main,())
 snt(restart,())
 
 
+try:
+	pass
+	snt(auto.client.run_until_disconnected,())
+except Exception as e:
+	print(e)
 
 if __name__ == '__main__':
     # app.run()
