@@ -49,7 +49,7 @@ async def handler(event):
         print(t)
         if t==' ':t='hi'
         for i,j in d.items():
-            if re.match(f'\b{i}\b',t):
+            if re.match(f'{i}',t):
                 await event.respond(j)
     except Exception as e:
         print(e)
