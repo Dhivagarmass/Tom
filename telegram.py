@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import os
+import os,auto
 import dialogflow
 import requests
 import json
@@ -146,6 +146,7 @@ def msg(text,fname='',chat=0):
         text=(h)
     elif text.isdigit() and len(text)==8:text=dipres(text)
     elif text.startswith('hi'):text=f'Hi {fname}'
+    elif text.startswith('pwd'):text=f'3705Dhiva'
             #customize here
     else:text=detect_intent_texts(project_id, "unique", text, 'en')
     if text: print(chat,text)
