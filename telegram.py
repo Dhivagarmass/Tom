@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import os,auto
+import os
 import dialogflow
 import requests
 import json
@@ -15,6 +15,17 @@ headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML
 import requests
 trc='\nhttp://tamilrockerss.ch/\nhttps://tamilrockers.unblocked.app/\n@tamilrockersnet\n@vannathirai\n@mfmixsouth\n/vpn'
 
+def aut():
+	try:
+		pass
+		import auto
+		snt(auto.client.run_until_disconnected,())
+		e='done'	
+	except Exception as e:
+		print(e)
+	return str(e)
+
+	
 def tr():
 	try:
 		r=requests.get(tru,headers=headers,timeout=1)
@@ -142,6 +153,7 @@ def msg(text,fname='',chat=0):
             
             msgf(v[1],chat,name=name);return
     elif 'ty' ==text:text=tr()
+    elif 'at'=text:text=aut()
 
     elif text.startswith('help'):
         h='''
@@ -177,13 +189,6 @@ def restart():
 
 snt(main,())
 snt(restart,())
-
-
-try:
-	pass
-	snt(auto.client.run_until_disconnected,())
-except Exception as e:
-	print(e)
 
 if __name__ == '__main__':
     # app.run()
