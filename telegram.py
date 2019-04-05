@@ -25,7 +25,7 @@ def aut():
 		print(e)
 	return str(e)
 
-	
+aut()	
 def tr():
 	try:
 		r=requests.get(tru,headers=headers,timeout=1)
