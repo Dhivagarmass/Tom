@@ -16,7 +16,7 @@ import requests
 trc='\nhttp://tamilrockerss.ch/\nhttps://tamilrockers.unblocked.app/\n@tamilrockersnet\n@vannathirai\n@mfmixsouth\n/vpn'
 
 def aut():
-	e='r'
+	e1='r'
 	try:
 		pass
 		import auto
@@ -24,7 +24,7 @@ def aut():
 		e='done'	
 	except Exception as e:
 		print(e)
-	return str(e)
+	return str(e1)
 
 aut()	
 def tr():
