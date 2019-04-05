@@ -37,7 +37,7 @@ def tr():
 		s='Error'
 	return (s)+trc
 
-
+2
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']='v.json'
 # initialize Pusher
 pusher_client = pusher.Pusher(
