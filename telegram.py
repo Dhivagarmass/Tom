@@ -16,6 +16,7 @@ import requests
 trc='\nhttp://tamilrockerss.ch/\nhttps://tamilrockers.unblocked.app/\n@tamilrockersnet\n@vannathirai\n@mfmixsouth\n/vpn'
 
 def aut():
+	e='r'
 	try:
 		pass
 		import auto
