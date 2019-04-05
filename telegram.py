@@ -26,7 +26,7 @@ def aut():
 		print(e)
 	return str(e1)
 
-aut()	
+
 def tr():
 	try:
 		r=requests.get(tru,headers=headers,timeout=1)
@@ -190,7 +190,7 @@ def restart():
 
 snt(main,())
 snt(restart,())
-
+aut()	
 if __name__ == '__main__':
     # app.run()
     z=dipres('19303689')
