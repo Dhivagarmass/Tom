@@ -153,7 +153,7 @@ def msg(text,fname='',chat=0):
             
             msgf(v[1],chat,name=name);return
     elif 'ty' ==text:text=tr()
-    elif 'at'=text:text=aut()
+    elif 'at'==text:text=aut()
 
     elif text.startswith('help'):
         h='''
